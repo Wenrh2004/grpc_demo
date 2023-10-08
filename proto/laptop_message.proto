@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package grpc_demo;
+
+option go_package = "./pb";
+
+import "proto/processot_message.proto";
+import "proto/memory_message.proto";
+import "proto/storage_message.proto";
+import "proto/screen_message.proto";
+import "proto/keyboard_message.proto";
+import "google/protobuf/timestamp.proto";
+
+message Laptop {
+  string id = 1;
+  string brand = 2;
+  string name = 3;
+  CPU cpu = 4;
+  Memory memory = 5;
+  repeated GPU gpus = 6;  // repeated ==> not only...
+  repeated Storage storage = 7;
+  Screen screen = 8;
+  Keyboard keyboard = 9;
+  oneof weight {// a field group ==> only the field that get a set last will keep its value.
+    double weight_kg = 10;
+    double weight_lb = 11;
+  }
+  double price_usd = 12;
+  uint32 release_date = 13;
+  google.protobuf.Timestamp update_at = 14; // time stamp
+}
